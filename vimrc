@@ -3,6 +3,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" Enable syntax highlighting
+syntax enable
+
 " Enable support for modelines
 set syntax=on
 set modeline
