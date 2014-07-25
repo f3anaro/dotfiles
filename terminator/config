@@ -1,0 +1,18 @@
+[global_config]
+  title_transmit_bg_color = "#297a37"
+[keybindings]
+[profiles]
+  [[default]]
+    background_darkness = 0.79
+    background_image = None
+    background_type = transparent
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
