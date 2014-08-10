@@ -154,3 +154,5 @@ done
 
 # Export the locale settings to supprt UTF-8
 export LC_ALL="en_US.UTF-8"
+
+. ~/dotfiles/virtualenvwrapper
