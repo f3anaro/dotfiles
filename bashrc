@@ -61,7 +61,7 @@ fi
 
 # Uncomment the following line to display the hostname in the
 # command line prompt
-#prompt_host=yes
+prompt_host=yes
 
 # Escape sequences for PS1 prompt
 # -------------------------------
