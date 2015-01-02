@@ -1,5 +1,13 @@
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=/media/data
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export PROJECT_HOME=$HOME
+# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
-source /usr/local/bin/virtualenvwrapper.sh
+# Includes shell scripts for virtualenvwrapper
+# The path depends on your installation. If you uses
+# 
+#   sudo pip install virtualenvwrapper
+#source /usr/local/bin/virtualenvwrapper.sh
+#  
+# ... or if you have used
+#   sudo apt-get install virtualenvwrapper
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
