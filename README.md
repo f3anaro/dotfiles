@@ -1,7 +1,9 @@
 # Personal dotfiles
 
-This repository contains the dotfiles for all my Posix working stations.
-I have customized:
+This repository contains my personal dotfiles for all my Posix working
+stations.
+
+## Customizations
 
  * Bash prompt
     - color
