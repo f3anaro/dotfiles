@@ -10,6 +10,10 @@
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
 
+# directory in which this script is located
+__FILE__="$(readlink -f ${BASH_SOURCE[0]})"
+__DIR__="$(dirname $__FILE__)"
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -78,7 +82,7 @@ prompt_host=yes
 
 if [ "$color_prompt" = yes ]; then
     # Include color definitions
-    . ~/dotfiles/colors
+    . $__DIR__/colors
 
     # Build of Steve Losh's prompt
      
@@ -139,7 +143,7 @@ unset color_prompt force_color_prompt prompt_host
 # Alias definitions.
 # 
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-. ~/dotfiles/aliases
+. $__DIR__/aliases
 
 # List of directories that should be included to the PATH variable
 # if they exist
@@ -155,4 +159,4 @@ done
 # Export the locale settings to supprt UTF-8
 export LC_ALL="en_US.UTF-8"
 
-. ~/dotfiles/virtualenvwrapper
+. $__DIR__/virtualenvwrapper
