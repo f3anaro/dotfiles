@@ -34,3 +34,8 @@ else
     [ -e ".virtalenvs/postactivate" ] && mv .virtalenvs/postactivate .virtalenvs/postactivate.old
 fi
 ln -vs $__dir__/.virtualenv/postactivate .virtalenvs/
+
+[ ! -d ".config" ] && mkdir -p .config/
+[ -d ".config/terminator" ] &&  [ ! -L ".config/terminator" ] && mv .config/terminator .config/terminator.old
+[ -L ".config/terminator" ] && rm -fv .config/terminator
+ln -vs $__dir__/terminator .config/
