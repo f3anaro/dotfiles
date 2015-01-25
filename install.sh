@@ -26,14 +26,14 @@ ln -vs $__dir__/.vim
 
 
 # Virtual environments (Python)
-[ ! -d ".virtualenvs/" ] && mkdir .virtalenvs/
+[ ! -d ".virtualenvs/" ] && mkdir .virtualenvs/
 # Remove existing postactive hook
 if [ -L ".virtualenvs/postactivate" ]; then
     rm -fv .virtualenvs/postactivate
 else
     [ -e ".virtualenvs/postactivate" ] && mv .virtualenvs/postactivate .virtualenvs/postactivate.old
 fi
-ln -vs $__dir__/.virtualenv/postactivate .virtalenvs/
+ln -vs $__dir__/.virtualenvs/postactivate .virtualenvs/
 
 [ ! -d ".config" ] && mkdir -p .config/
 [ -d ".config/terminator" ] &&  [ ! -L ".config/terminator" ] && mv .config/terminator .config/terminator.old
