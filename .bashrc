@@ -65,7 +65,7 @@ fi
 
 # Uncomment the following line to display the hostname in the
 # command line prompt
-prompt_host=yes
+#prompt_host=yes
 
 # Escape sequences for PS1 prompt
 # -------------------------------
@@ -97,7 +97,11 @@ if [ "$color_prompt" = yes ]; then
 
     # Monokai inspired prompt theme
     PS1="${debian_chroot:+($debian_chroot)}"
-    PS1+="${MonoBGreen}\u"
+    if [[ $EUID -ne 0 ]]; then
+        PS1+="${MonoBGreen}\u"
+    else
+        PS1+="${BRed}\u"
+    fi
 
     if [ "$prompt_host" = yes ]; then
         PS1+="${CandyBGray}@"
