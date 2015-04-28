@@ -21,7 +21,7 @@ alias c='clear'
 # Command shortcuts
 alias py="python3"
 alias subl="$HOME/local/opt/sublime_text_3/sublime_text"
-alias sag="sudo apt-get"
+alias clion="$HOME/local/opt/clion-1.0/bin/clion.sh &> /dev/null &"
 
 alias ..="cd .."
 alias ...="cd ../.."
