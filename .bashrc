@@ -154,7 +154,7 @@ unset color_prompt force_color_prompt prompt_host
 BIN_DIRS=("$HOME/bin" "$HOME/local/bin")
 
 # Set PATH so it includes user's private bin directories if they exists
-for dir in $BIN_DIRS; do
+for dir in ${BIN_DIRS[@]}; do
     if [ -d $dir ] ; then
         PATH="$dir:$PATH"
     fi
