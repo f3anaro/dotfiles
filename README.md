@@ -12,3 +12,13 @@ stations.
  * virtualenvwrapper
  * some aliases
  * include `~/bin` directory to `$PATH` env variable
+ * my personal .gitconfig 
+
+## Installation
+
+There exists a simple install script creating symlinks in your
+home directory to the files in this repo
+
+```bash
+./install.sh
+```
