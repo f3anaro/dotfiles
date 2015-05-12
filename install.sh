@@ -39,3 +39,11 @@ ln -vs $__dir__/.virtualenvs/postactivate .virtualenvs/
 [ -d ".config/terminator" ] &&  [ ! -L ".config/terminator" ] && mv .config/terminator .config/terminator.old
 [ -L ".config/terminator" ] && rm -fv .config/terminator
 ln -vs $__dir__/terminator .config/
+
+# create .ssh/ config directory
+[ ! -d ".ssh" ] && mkdir -p .ssh/
+# backup current ssh config if it is not alreayd a symlink
+[ ! -L ".ssh/config" ] && mv .ssh/config .ssh/config.old
+# remove old symlink
+[ -L ".ssh/config" ] && rm -fv .ssh/config
+ln -vs $__dir__/.ssh/config .ssh/config
