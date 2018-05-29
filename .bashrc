@@ -10,16 +10,16 @@
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
 
+HISTSIZE=100000                   # big big history
+HISTFILESIZE=100000               # big big history
+shopt -s histappend               # append to history, don't overwrite it
+
+# Save and reload the history after each command finishes
+# PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 # directory in which this script is located
 __FILE__="$(readlink -f ${BASH_SOURCE[0]})"
 __DIR__="$(dirname $__FILE__)"
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -63,6 +63,13 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+show_virtual_env() {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    # echo "($(basename $VIRTUAL_ENV))"
+    echo "venv"
+  fi
+}
+
 # Uncomment the following line to display the hostname in the
 # command line prompt
 #prompt_host=yes
@@ -103,7 +110,7 @@ if [ "$color_prompt" = yes ]; then
         PS1+="${BRed}\u"
     fi
 
-    if [ "$prompt_host" = yes ]; then
+    if [ "$prompt_host" = yes ] || [ ! -z "$SSH_CLIENT" ]; then
         PS1+="${CandyBGray}@"
         # PS1+="${CandyBGray} at " # A more verbose alternative
         PS1+="${CandyBOrange}\h "
@@ -115,7 +122,14 @@ if [ "$color_prompt" = yes ]; then
     PS1+="${BWhite}\w "
     # PS1+="$(__git_ps1 "${CandyBGray}on ${MonoBPink}%s ")"
     PS1+="${MonoBPink}\$(__git_ps1 '${CandyBGray}on ${MonoBPink}%s ')"
-    PS1+="\n${BWhite}\$ $Color_Off"
+    PS1+="${CandyBOrange}\$(show_virtual_env)"
+    PS1+="\n${BWhite}"
+    if [[ $EUID -ne 0 ]]; then
+      PS1+="\$"
+    else
+      PS1+="#"
+    fi
+    PS1+=" $Color_Off"
 else
     # prompt without color support
     PS1="${debian_chroot:+($debian_chroot)}\u"
@@ -128,7 +142,7 @@ else
     fi
 
     # Append short path and git status
-    PS1+="\w \$(__git_ps1 'on %s ')\n\$ "
+    PS1+="\w \$(__git_ps1 'on %s ')\$(show_virtual_env)\n\$ "
 fi
 
 # Clear flags
@@ -151,7 +165,12 @@ unset color_prompt force_color_prompt prompt_host
 
 # List of directories that should be included to the PATH variable
 # if they exist
-BIN_DIRS=("$HOME/bin" "$HOME/local/bin")
+BIN_DIRS=(
+    "$HOME/bin"
+    "$HOME/local/bin"
+    "$HOME/.local/bin"
+    "$HOME/.gem/ruby/2.3.0/bin"
+)
 
 # Set PATH so it includes user's private bin directories if they exists
 for dir in ${BIN_DIRS[@]}; do
@@ -163,5 +182,10 @@ done
 # Export the locale settings to supprt UTF-8
 export LC_ALL="en_US.UTF-8"
 
-export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-. $__DIR__/virtualenvwrapper
+# . $__DIR__/virtualenvwrapper
+# . $__DIR__/virtualenv-auto-activate.sh
+
+eval "$(direnv hook bash)"
+
+# added by travis gem
+[ -f /home/lucas/.travis/travis.sh ] && source /home/lucas/.travis/travis.sh

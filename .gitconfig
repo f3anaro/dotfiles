@@ -5,3 +5,14 @@
 	editor = vim
 [merge]
 	tool = meld
+[push]
+	default = simple
+[fetch]
+	recurseSubmodules = false
+[alias]
+	wdiff = diff --color-words
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
