@@ -48,3 +48,5 @@ done
 # remove old symlink
 [ -L ".ssh/config" ] && rm -fv .ssh/config
 ln -vs $__dir__/.ssh/config .ssh/config
+
+ln -vs $__dir__/.screenlayout .screenlayout/
