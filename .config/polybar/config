@@ -1,26 +1,52 @@
-[bar/top]
-# monitor = HDMI-0
-width = 100%
-height = 34
-
-background = #dd000000
+[colors]
+background = #aa000000
 foreground = #ffffffff
+
+primary = #00a1f1
+secondary = #fba922
+white = #fff
+gray = #888
+lightgray = #ddd
+
+urgent = #bd2c40
+highlight = #e60053
+
+
+[bar/top]
+monitor = ${env:POLYBAR_MONITOR:HDMI-0}
+width = 100%
+height = 27
+
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 line-color = ${bar/bottom.background}
 line-size = 16
 
-spacing = 2
-padding-right = 5
+spacing = 3
+padding-left = 4
+padding-right = 4
 module-margin = 4
 
-font-0 = NotoSans-Regular:size=8;-1
-font-1 = MaterialIcons:size=10;0
-font-2 = Termsynu:size=8:antialias=false;-2
-font-3 = FontAwesome:size=10;0
+# Font for text
+font-0 = Noto Sans:style=Regular:size=8;1
 
-modules-left = powermenu mpd
-# modules-right = volume backlight wlan eth battery date
-modules-right = volume eth date
+# Font for icons
+font-1 = Material Icons:style=Regular:size=10;1
+
+# Font for progress bars
+font-2 = Termsynu:size=8:antialias=false;1
+
+# Font for vertical centering i3 workspace numbers
+font-3 = NotoSans-Regular:size=8;1
+
+# Additional icon font
+font-4 = Font Awesome:style=Regular;size=10;1
+
+modules-left = powermenu
+modules-center = date
+modules-right = volume wlan eth backlight battery
+
 
 [bar/bottom]
 monitor = ${env:POLYBAR_MONITOR:HDMI-0}
@@ -28,10 +54,10 @@ bottom = true
 width = 100%
 height = 27
 
-background = ${bar/top.background}
-foreground = ${bar/top.foreground}
+background = ${colors.background}
+foreground = ${colors.foreground}
 
-line-color = ${bar/top.background}
+line-color = ${colors.background}
 line-size = 2
 
 spacing = 3
@@ -51,21 +77,11 @@ font-2 = Termsynu:size=8:antialias=false;4
 # Font for vertical centering i3 workspace numbers
 font-3 = NotoSans-Regular:size=8;2
 
-
 modules-left = i3
-modules-center = date
-modules-right = volume eth cpu memory filesystem powermenu
+# modules-center = date
+modules-right = cpu memory filesystem
 
 
-[colors]
-primary = #00a1f1
-secondary = #fba922
-white = #fff
-gray = #555
-lightgray = #ddd
-
-urgent = #bd2c40
-highlight = #e60053
 
 
 [module/i3]
@@ -148,55 +164,59 @@ label-separator-font = 4
 
 [module/backlight]
 type = internal/xbacklight
-format = <ramp> <bar>
 
+# Use the following command to list available cards:
+# $ ls -1 /sys/class/backlight/
+# card = intel_backlight
+
+# XRandR output to get get values from
+# Default: the monitor defined for the running bar
+monitor = eDP-0
+
+# Available tags:
+#   <label> (default)
+#   <ramp>
+#   <bar>
+format = <ramp> <label>
+
+# Available tokens:
+#   %percentage% (default)
+label = %percentage%%
+
+# Only applies if <ramp> is used
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 
+# Only applies if <bar> is used
 bar-width = 10
 bar-indicator = |
 bar-indicator-font = 3
-bar-indicator-foreground = #ff
+bar-indicator-foreground = ${colors.white}
 bar-fill = ─
 bar-fill-font = 3
-bar-fill-foreground = #c9665e
+bar-fill-foreground = ${colors.primary}
 bar-empty = ─
 bar-empty-font = 3
-bar-empty-foreground = #44
+bar-empty-foreground = ${colors.gray}
 
 
 [module/battery]
 type = internal/battery
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <ramp-capacity> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-full = <ramp-capacity> <label-full>
 
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-0-foreground = ${colors.urgent}
 ramp-capacity-1 = 
-ramp-capacity-1-foreground = #ffa900
+ramp-capacity-1-foreground = ${colors.secondary}
 ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.white}
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-
-bar-capacity-width = 10
-bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
-bar-capacity-fill = █
-bar-capacity-fill-foreground = #ddffffff
-bar-capacity-fill-font = 3
-bar-capacity-empty = █
-bar-capacity-empty-font = 3
-bar-capacity-empty-foreground = #44ffffff
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-framerate = 750
 
 
 [module/date]
@@ -207,10 +227,10 @@ interval = 1.0
 
 # See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
 # NOTE: if you want to use syntax tags here you need to use %%{...}
-date =  %%{F#666}%A, %d %B %Y
+date =  %%{F#999}%A, %d %B %Y
 
 # Optional time format
-time = %%{F#fff}%H%%{F#666}:%%{F#fff}%M%
+time = %%{F#fff}%H%%{F#999}:%%{F#fff}%M%
 
 # if `date-alt` or `time-alt` is defined, clicking
 # the module will toggle between formats
@@ -322,7 +342,7 @@ type = internal/fs
 # Mountpoints to display
 mount-0 = /
 mount-1 = /home
-mount-2 = /media/data
+# mount-2 = /media/data
 
 # Seconds to sleep between updates
 # Default: 30
@@ -357,7 +377,7 @@ format-unmounted = <label-unmounted>
 #   %free%
 #   %used%
 # Default: %mountpoint% %percentage_free%%
-label-mounted = %{F#555}%mountpoint% %{F-}%free%
+label-mounted = %{F#888}%mountpoint% %{F-}%free%
 
 # Available tokens:
 #   %mountpoint%
@@ -396,7 +416,7 @@ bar-progress-empty-foreground = #44
 
 [module/eth]
 type = internal/network
-interface = enp6s0
+interface = enp0s25
 
 # Seconds to sleep between updates
 # Default: 1
@@ -442,28 +462,29 @@ format-packetloss = <label-connected>
 #   %upspeed%   [wireless+wired]
 #   %downspeed% [wireless+wired]
 #   %linkspeed% [wired]
-
 # Default: %ifname% %local_ip%
-# label-connected = %local_ip%  %{F#555}%linkspeed%
-# label-connected = %{F#555}%ifname%:  %{F#ddd}%local_ip%
-label-connected = %local_ip%
-label-connected-foreground = ${colors.lightgray}
+# label-connected = %local_ip%  %{F#888}%linkspeed%
+# label-connected = %{F#888}%ifname%:  %{F#ddd}%local_ip%
+label-connected =   %local_ip%
+# label-connected-foreground = ${colors.lightgray}
 
 # Default: (none)
-label-disconnected = disconnected
-label-disconnected-foreground = ${colors.highlight}
+label-disconnected =  disconnected
+label-disconnected-foreground = ${colors.gray}
 
 
 [module/wlan]
 type = internal/network
-interface = wlan0
+interface = wlp3s0
 interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = %essid%
-label-disconnected =    not connected
-label-disconnected-foreground = #66
+label-connected = %signal%%  %{F#888}%essid%  %{F-}%local_ip%
+# label-connected-foreground = ${colors.lightgray}
+
+label-disconnected =  disconnected
+label-disconnected-foreground = ${colors.gray}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -541,6 +562,7 @@ label-volume = %percentage%%
 label-muted = 
 label-muted-foreground = ${colors.gray}
 
+# Only applies if <ramp-volume> is used
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
@@ -560,30 +582,42 @@ bar-volume-empty = ─
 bar-volume-empty-font = 3
 bar-volume-empty-foreground = ${colors.gray}
 
+# If defined, it will replace <ramp-volume> when
+# headphones are plugged in to `headphone_control_numid`
+# If undefined, <ramp-volume> will be used for both
+# Only applies if <ramp-volume> is used
+ramp-headphones-0 = 
+
 
 [module/powermenu]
 type = custom/menu
+
+# If true, <label-toggle> will be to the left of the menu items (default).
+# If false, it will be on the right of all the items.
+expand-right = true
 
 # Optional item separator
 # Default: none
 label-separator = |
 
-label-open = 
-label-close = 
+label-open = 
+label-open-foreground = ${colors.white}
+label-close = 
+label-close-foreground = ${colors.white}
 
-menu-0-0 = Lock
-menu-0-0-foreground = ${colors.primary}
+menu-0-0 =  Lock
+menu-0-0-foreground = ${colors.white}
 menu-0-0-exec = i3-msg lock
 
-menu-0-1 = Logout
-menu-0-1-foreground = ${colors.primary}
+menu-0-1 =  Logout
+menu-0-1-foreground = ${colors.white}
 menu-0-1-exec = i3-msg exit
 
-menu-0-2 = Reboot
+menu-0-2 =  Reboot
 menu-0-2-foreground = ${colors.highlight}
 menu-0-2-exec = reboot
 
-menu-0-3 = Power off
+menu-0-3 =  Power off
 menu-0-3-foreground = ${colors.highlight}
 menu-0-3-exec = poweroff
 

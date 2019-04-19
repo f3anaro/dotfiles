@@ -7,6 +7,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 for MONITOR in $(xrandr -q | grep -w connected | cut -d" " -f1); do
+    POLYBAR_MONITOR=$MONITOR polybar top &
     POLYBAR_MONITOR=$MONITOR polybar bottom &
 done
 
