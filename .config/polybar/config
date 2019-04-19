@@ -47,6 +47,40 @@ modules-left = powermenu
 modules-center = date
 modules-right = volume wlan eth backlight battery
 
+# Position of the system tray window
+# If empty or undefined, tray support will be disabled
+# NOTE: A center aligned tray will cover center aligned modules
+#
+# Available positions:
+#   left
+#   center
+#   right
+#   none
+tray-position = right
+
+# If true, the bar will not shift its
+# contents when the tray changes
+tray-detached = false
+
+# Tray icon max size
+tray-maxsize = 16
+
+# Background color for the tray container
+# ARGB color (e.g. #f00, #ff992a, #ddff1023)
+# By default the tray container will use the bar
+# background color.
+tray-background = ${bar/top.background}
+
+# Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+# Pad the sides of each tray icon
+tray-padding = 0
+
+# Scale factor for tray clients
+tray-scale = 1.0
+
 
 [bar/bottom]
 monitor = ${env:POLYBAR_MONITOR:HDMI-0}
@@ -80,8 +114,6 @@ font-3 = NotoSans-Regular:size=8;2
 modules-left = i3
 # modules-center = date
 modules-right = cpu memory filesystem
-
-
 
 
 [module/i3]
@@ -342,7 +374,7 @@ type = internal/fs
 # Mountpoints to display
 mount-0 = /
 mount-1 = /home
-# mount-2 = /media/data
+mount-2 = /media/data
 
 # Seconds to sleep between updates
 # Default: 30
@@ -416,7 +448,7 @@ bar-progress-empty-foreground = #44
 
 [module/eth]
 type = internal/network
-interface = enp0s25
+interface = enp6s0
 
 # Seconds to sleep between updates
 # Default: 1
@@ -600,7 +632,8 @@ expand-right = true
 # Default: none
 label-separator = |
 
-label-open = 
+#label-open = 
+label-open = 
 label-open-foreground = ${colors.white}
 label-close = 
 label-close-foreground = ${colors.white}
