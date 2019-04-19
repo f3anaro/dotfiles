@@ -6,9 +6,14 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-for MONITOR in $(xrandr -q | grep -w connected | cut -d" " -f1); do
-    POLYBAR_MONITOR=$MONITOR polybar top &
-    POLYBAR_MONITOR=$MONITOR polybar bottom &
+for monitor in $(xrandr -q | grep -w connected | awk '{print $1}'); do
+    # Start top-bar with tray on primary screen
+    if [ $(xrandr -q | grep primary | awk '{print $1}') == $monitor ]; then
+        POLYBAR_MONITOR=$monitor polybar top-tray &
+    else
+        POLYBAR_MONITOR=$monitor polybar top &
+    fi
+    POLYBAR_MONITOR=$monitor polybar bottom &
 done
 
 # Terminate already running compton instances

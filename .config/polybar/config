@@ -29,23 +29,27 @@ padding-right = 4
 module-margin = 4
 
 # Font for text
-font-0 = Noto Sans:style=Regular:size=8;1
+font-0 = Noto Sans:style=Regular:size=8;2
 
 # Font for icons
-font-1 = Material Icons:style=Regular:size=10;1
+font-1 = Material Icons:style=Regular:size=12;2
 
 # Font for progress bars
-font-2 = Termsynu:size=8:antialias=false;1
+font-2 = Termsynu:size=8:antialias=false;2
 
 # Font for vertical centering i3 workspace numbers
-font-3 = NotoSans-Regular:size=8;1
+font-3 = NotoSans-Regular:size=8;2
 
 # Additional icon font
-font-4 = Font Awesome:style=Regular;size=10;1
+font-4 = Font Awesome:style=Regular;size=10;2
 
 modules-left = powermenu
 modules-center = date
 modules-right = volume wlan eth backlight battery
+
+
+[bar/top-tray]
+inherits = bar/top
 
 # Position of the system tray window
 # If empty or undefined, tray support will be disabled
@@ -69,17 +73,18 @@ tray-maxsize = 16
 # ARGB color (e.g. #f00, #ff992a, #ddff1023)
 # By default the tray container will use the bar
 # background color.
-tray-background = ${bar/top.background}
+tray-background = ${colors.background}
 
 # Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 tray-offset-x = 0
 tray-offset-y = 0
 
 # Pad the sides of each tray icon
-tray-padding = 0
+tray-padding = 6
 
 # Scale factor for tray clients
 tray-scale = 1.0
+
 
 
 [bar/bottom]
@@ -512,7 +517,7 @@ interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = %signal%%  %{F#888}%essid%  %{F-}%local_ip%
+label-connected = %{F#888}%essid% %{F-}%local_ip%
 # label-connected-foreground = ${colors.lightgray}
 
 label-disconnected =  disconnected
@@ -632,15 +637,15 @@ expand-right = true
 # Default: none
 label-separator = |
 
-#label-open = 
-label-open = 
+label-open = 
+#label-open = 
 label-open-foreground = ${colors.white}
 label-close = 
 label-close-foreground = ${colors.white}
 
 menu-0-0 =  Lock
 menu-0-0-foreground = ${colors.white}
-menu-0-0-exec = i3-msg lock
+menu-0-0-exec = $HOME/.config/i3/lock.sh
 
 menu-0-1 =  Logout
 menu-0-1-foreground = ${colors.white}
