@@ -1,3 +1,5 @@
 # Ignore the folder where the dotfiles will be cloned to avoid weird recursion
 # problems.
 /.dotfiles
+
+.vim/.netrwhist
