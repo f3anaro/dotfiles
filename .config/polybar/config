@@ -1,0 +1,744 @@
+[colors]
+background = #aa000000
+foreground = #ffffffff
+
+primary = #00a1f1
+secondary = #fba922
+white = #fff
+gray = #888
+lightgray = #ddd
+
+urgent = #bd2c40
+highlight = #e60053
+
+
+[bar/top]
+monitor = ${env:POLYBAR_MONITOR:HDMI-0}
+width = 100%
+height = 27
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-color = ${bar/bottom.background}
+line-size = 16
+
+spacing = 3
+padding-left = 4
+padding-right = 4
+module-margin = 4
+
+# Font for text
+font-0 = Noto Sans:style=Regular:size=8;2
+
+# Font for icons
+font-1 = Material Icons:style=Regular:size=12;2
+
+# Font for progress bars
+font-2 = Termsynu:size=8:antialias=false;2
+
+# Font for vertical centering i3 workspace numbers
+font-3 = NotoSans-Regular:size=8;2
+
+# Additional icon font
+font-4 = Font Awesome:style=Regular;size=10;2
+
+modules-left = powermenu
+modules-center = date
+modules-right = volume wlan eth backlight battery
+
+
+[bar/top-tray]
+inherits = bar/top
+
+# Position of the system tray window
+# If empty or undefined, tray support will be disabled
+# NOTE: A center aligned tray will cover center aligned modules
+#
+# Available positions:
+#   left
+#   center
+#   right
+#   none
+tray-position = right
+
+# If true, the bar will not shift its
+# contents when the tray changes
+tray-detached = false
+
+# Tray icon max size
+tray-maxsize = 16
+
+# Background color for the tray container
+# ARGB color (e.g. #f00, #ff992a, #ddff1023)
+# By default the tray container will use the bar
+# background color.
+tray-background = ${colors.background}
+
+# Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+# Pad the sides of each tray icon
+tray-padding = 6
+
+# Scale factor for tray clients
+tray-scale = 1.0
+
+
+
+[bar/bottom]
+monitor = ${env:POLYBAR_MONITOR:HDMI-0}
+bottom = true
+width = 100%
+height = 27
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-color = ${colors.background}
+line-size = 2
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+# Font for text
+font-0 = Noto Sans:style=Regular:size=8;4
+
+# Font for icons
+font-1 = Material Icons:style=Regular:size=10;4
+
+# Font for progress bars
+font-2 = Termsynu:size=8:antialias=false;4
+
+# Font for vertical centering i3 workspace numbers
+font-3 = NotoSans-Regular:size=8;2
+
+modules-left = i3
+# modules-center = date
+modules-right = cpu memory filesystem
+
+
+[module/i3]
+type = internal/i3
+
+# Only show workspaces defined on the same output as the bar
+#
+# Useful if you want to show monitor specific workspaces
+# on different bars
+#
+# Default: false
+pin-workspaces = true
+
+# Available tags:
+#   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+#   <label-mode> (default)
+format = <label-state> <label-mode>
+format-font = 4
+
+# Available tokens:
+#   %mode%
+# Default: %mode%
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colors.highlight}
+label-mode-font = 4
+
+# Available tokens:
+#   %name%
+#   %icon%
+#   %index%
+#   %output%
+# Default: %icon%  %name%
+label-focused = %index%
+label-focused-foreground = ${colors.white}
+label-focused-background = #3f3f3f
+label-focused-underline = ${colors.primary}
+label-focused-padding = 4
+label-focused-font = 4
+
+# Available tokens:
+#   %name%
+#   %icon%
+#   %index%
+#   %output%
+# Default: %icon%  %name%
+label-unfocused = %index%
+label-unfocused-padding = 4
+label-unfocused-font = 4
+
+# Available tokens:
+#   %name%
+#   %icon%
+#   %index%
+#   %output%
+# Default: %icon%  %name%
+label-visible = %index%
+label-visible-underline = ${colors.gray}
+label-visible-padding = 4
+label-visible-font = 4
+
+# Available tokens:
+#   %name%
+#   %icon%
+#   %index%
+#   %output%
+# Default: %icon%  %name%
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = ${colors.urgent}
+label-urgent-padding = 4
+label-urgent-font = 4
+
+# Separator in between workspaces
+label-separator = |
+label-separator-padding = 2
+label-separator-foreground = ${colors.primary}
+label-separator-font = 4
+
+
+[module/backlight]
+type = internal/xbacklight
+
+# Use the following command to list available cards:
+# $ ls -1 /sys/class/backlight/
+# card = intel_backlight
+
+# XRandR output to get get values from
+# Default: the monitor defined for the running bar
+monitor = eDP-0
+
+# Available tags:
+#   <label> (default)
+#   <ramp>
+#   <bar>
+format = <ramp> <label>
+
+# Available tokens:
+#   %percentage% (default)
+label = %percentage%%
+
+# Only applies if <ramp> is used
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+# Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = ${colors.white}
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = ${colors.primary}
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = ${colors.gray}
+
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+format-charging = <ramp-capacity> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.urgent}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.secondary}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.white}
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+
+[module/date]
+type = internal/date
+
+# Seconds to sleep between updates
+interval = 1.0
+
+# See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+# NOTE: if you want to use syntax tags here you need to use %%{...}
+date =  %%{F#999}%A, %d %B %Y
+
+# Optional time format
+time = %%{F#fff}%H%%{F#999}:%%{F#fff}%M%
+
+# if `date-alt` or `time-alt` is defined, clicking
+# the module will toggle between formats
+# date-alt = %A, %d %B %Y
+# time-alt = %H:%M:%S
+
+# Available tags:
+#   <label> (default)
+format = <label>
+
+# Available tokens:
+#   %date%
+#   %time%
+# Default: %date%
+label = %date% %time%
+
+
+[module/cpu]
+type = internal/cpu
+
+# Seconds to sleep between updates
+# Default: 1
+interval = 1
+
+# Available tags:
+#   <label> (default)
+#   <bar-load>
+#   <ramp-load>
+#   <ramp-coreload>
+format = <label> <ramp-coreload>
+
+# Available tokens:
+#   %percentage% (default) - total cpu load averaged over all cores
+#   %percentage-sum% - Cumulative load on all cores
+#   %percentage-cores% - load percentage for each core
+#   %percentage-core[1-9]% - load percentage for specific core
+label = CPU
+
+# Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+ramp-coreload-foreground = ${colors.secondary}
+
+
+[module/memory]
+type = internal/memory
+
+# Seconds to sleep between updates
+internal = 1
+
+# Available tags:
+#   <label> (default)
+#   <bar-used>
+#   <bar-free>
+#   <ramp-used>
+#   <ramp-free>
+#   <bar-swap-used>
+#   <bar-swap-free>
+#   <ramp-swap-used>
+#   <ramp-swap-free>
+format = <label> <bar-used>
+
+# Available tokens:
+#   %percentage_used% (default)
+#   %percentage_free%
+#   %gb_used%
+#   %gb_free%
+#   %gb_total%
+#   %mb_used%
+#   %mb_free%
+#   %mb_total%
+#   %percentage_swap_used%
+#   %percentage_swap_free%
+#   %mb_swap_total%
+#   %mb_swap_free%
+#   %mb_swap_used%
+#   %gb_swap_total%
+#   %gb_swap_free%
+#   %gb_swap_used%
+label = RAM
+
+bar-used-width = 15
+bar-used-foreground-0 = ${colors.secondary}
+bar-used-foreground-1 = ${colors.secondary}
+bar-used-foreground-2 = ${colors.secondary}
+bar-used-foreground-3 = ${colors.secondary}
+bar-used-indicator = |
+bar-used-indicator-font = 3
+bar-used-indicator-foreground = ${colors.white}
+bar-used-fill = ─
+bar-used-fill-font = 3
+bar-used-empty = ─
+bar-used-empty-font = 3
+bar-used-empty-foreground = ${colors.gray}
+
+
+[module/filesystem]
+type = internal/fs
+
+# Mountpoints to display
+mount-0 = /
+mount-1 = /home
+mount-2 = /media/data
+
+# Seconds to sleep between updates
+# Default: 30
+interval = 30
+
+# Display fixed precision values
+# Default: false
+fixed-values = false
+
+# Spacing between entries
+# Default: 2
+spacing = 3
+
+# Available tags:
+#   <label-mounted> (default)
+#   <bar-free>
+#   <bar-used>
+#   <ramp-capacity>
+format-mounted = <label-mounted>
+
+# Available tags:
+#   <label-unmounted> (default)
+format-unmounted = <label-unmounted>
+
+# Available tokens:
+#   %mountpoint%
+#   %type%
+#   %fsname%
+#   %percentage_free%
+#   %percentage_used%
+#   %total%
+#   %free%
+#   %used%
+# Default: %mountpoint% %percentage_free%%
+label-mounted = %{F#888}%mountpoint% %{F-}%free%
+
+# Available tokens:
+#   %mountpoint%
+# Default: %mountpoint% is not mounted
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = ${colors.gray}
+
+
+[module/mpd]
+type = internal/mpd
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground =
+toggle-off-foreground = #55
+
+bar-progress-width = 45
+bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
+bar-progress-indicator = |
+bar-progress-indicator-foreground = #ff
+bar-progress-indicator-font = 3
+bar-progress-fill = ─
+bar-progress-fill-foreground = #bb
+bar-progress-fill-font = 3
+bar-progress-empty = ─
+bar-progress-empty-font = 3
+bar-progress-empty-foreground = #44
+
+
+[module/eth]
+type = internal/network
+interface = enp6s0
+
+# Seconds to sleep between updates
+# Default: 1
+interval = 3.0
+
+# Test connectivity every Nth update
+# A value of 0 disables the feature
+# NOTE: Experimental (needs more testing)
+# Default: 0
+#ping-interval = 3
+
+# Accumulate values from all interfaces
+# when querying for up/downspeed rate
+# Default: false
+accumulate-stats = false
+
+# Consider an `UNKNOWN` interface state as up.
+# Some devices have an unknown state, even when they're running
+# Default: false
+unknown-as-up = false
+
+# Available tags:
+#   <label-connected> (default)
+#   <ramp-signal>
+format-connected = <label-connected>
+
+# Available tags:
+#   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+
+# Available tags:
+#   <label-connected> (default)
+#   <label-packetloss>
+#   <animation-packetloss>
+format-packetloss = <label-connected>
+
+# All labels support the following tokens:
+#   %ifname%    [wireless+wired]
+#   %local_ip%  [wireless+wired]
+#   %local_ip6% [wireless+wired]
+#   %essid%     [wireless]
+#   %signal%    [wireless]
+#   %upspeed%   [wireless+wired]
+#   %downspeed% [wireless+wired]
+#   %linkspeed% [wired]
+# Default: %ifname% %local_ip%
+# label-connected = %local_ip%  %{F#888}%linkspeed%
+# label-connected = %{F#888}%ifname%:  %{F#ddd}%local_ip%
+label-connected =   %local_ip%
+# label-connected-foreground = ${colors.lightgray}
+
+# Default: (none)
+label-disconnected =  disconnected
+label-disconnected-foreground = ${colors.gray}
+
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+ping-interval = 10
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %{F#888}%essid% %{F-}%local_ip%
+# label-connected-foreground = ${colors.lightgray}
+
+label-disconnected =  disconnected
+label-disconnected-foreground = ${colors.gray}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+
+[module/volume]
+type = internal/alsa
+
+# Soundcard to be used
+# Usually in the format hw:# where # is the card number
+# You can find the different card numbers in `/proc/asound/cards`
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+# Name of the master, speaker and headphone mixers
+# Use the following command to list available mixer controls:
+# $ amixer scontrols | sed -nr "s/.*'([[:alnum:]]+)'.*/\1/p"
+# If master, speaker or headphone-soundcard isn't the default, 
+# use `amixer -c # scontrols` instead where # is the number 
+# of the master, speaker or headphone soundcard respectively
+#
+# Default: Master
+master-mixer = Master
+
+# Optionally define speaker and headphone mixers
+# Default: none
+#speaker-mixer = Speaker
+
+# Default: none
+#headphone-mixer = Headphone
+
+# NOTE: This is required if headphone_mixer is defined
+# Use the following command to list available device controls
+# $ amixer controls | sed -r "/CARD/\!d; s/.*=([0-9]+).*name='([^']+)'.*/printf '%3.0f: %s\n' '\1' '\2'/e" | sort
+# You may also need to use `amixer -c # controls` as above for the mixer names
+# Default: none
+#headphone-id = 9
+
+# Use volume mapping (similar to amixer -M and alsamixer), where the increase in volume is linear to the ear
+# Default: false
+mapped = false
+
+# Interval for volume increase/decrease (in percent points)
+# Default: 5
+interval = 5
+
+# Available tags:
+#   <label-volume> (default)
+#   <ramp-volume>
+#   <bar-volume>
+format-volume = <ramp-volume> <label-volume> <bar-volume>
+
+# Available tags:
+#   <label-muted> (default)
+#   <ramp-volume>
+#   <bar-volume>
+format-muted = <label-muted>
+
+# Available tokens:
+#   %percentage% (default)
+label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+label-muted = 
+label-muted-foreground = ${colors.gray}
+
+# Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+bar-volume-width = 15
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-gradient = false
+bar-volume-indicator = │
+bar-volume-indicator-font = 3
+bar-volume-indicator-foreground = ${colors.white}
+bar-volume-fill = ─
+bar-volume-fill-font = 3
+bar-volume-empty = ─
+bar-volume-empty-font = 3
+bar-volume-empty-foreground = ${colors.gray}
+
+# If defined, it will replace <ramp-volume> when
+# headphones are plugged in to `headphone_control_numid`
+# If undefined, <ramp-volume> will be used for both
+# Only applies if <ramp-volume> is used
+ramp-headphones-0 = 
+
+
+[module/powermenu]
+type = custom/menu
+
+# If true, <label-toggle> will be to the left of the menu items (default).
+# If false, it will be on the right of all the items.
+expand-right = true
+
+# Optional item separator
+# Default: none
+label-separator = |
+
+label-open = 
+#label-open = 
+label-open-foreground = ${colors.white}
+label-close = 
+label-close-foreground = ${colors.white}
+
+menu-0-0 =  Lock
+menu-0-0-foreground = ${colors.white}
+menu-0-0-exec = $HOME/.config/i3/lock.sh
+
+menu-0-1 =  Logout
+menu-0-1-foreground = ${colors.white}
+menu-0-1-exec = i3-msg exit
+
+menu-0-2 =  Reboot
+menu-0-2-foreground = ${colors.highlight}
+menu-0-2-exec = reboot
+
+menu-0-3 =  Power off
+menu-0-3-foreground = ${colors.highlight}
+menu-0-3-exec = poweroff
+
+
+[module/mdp]
+type = internal/mpd
+
+# Host where mpd is running (either ip or domain name)
+# Can also be the full path to a unix socket where mpd is running.
+host = localhost
+port = 6600
+# password = mysecretpassword
+
+# Seconds to sleep between progressbar/song timer sync
+interval = 1
+
+# Available tags:
+#   <label-song> (default)
+#   <label-time>
+#   <bar-progress>
+#   <toggle> - gets replaced with <icon-(pause|play)>
+#   <toggle-stop> - gets replaced with <icon-(stop|play)>
+#   <icon-random>
+#   <icon-repeat>
+#   <icon-repeatone> (deprecated)
+#   <icon-single> - Toggle playing only a single song. Replaces <icon-repeatone>
+#   <icon-consume>
+#   <icon-prev>
+#   <icon-stop>
+#   <icon-play>
+#   <icon-pause>
+#   <icon-next>
+#   <icon-seekb>
+#   <icon-seekf>
+format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+#format-playing = ${self.format-online}
+#format-paused = ${self.format-online}
+#format-stopped = ${self.format-online}
+
+# Available tags:
+#   <label-offline>
+#format-offline = <label-offline>
+
+# Available tokens:
+#   %artist%
+#   %album-artist%
+#   %album%
+#   %date%
+#   %title%
+# Default: %artist% - %title%
+label-song = 𝄞 %artist% - %title%
+
+# Available tokens:
+#   %elapsed%
+#   %total%
+# Default: %elapsed% / %total%
+#label-time = %elapsed% / %total%
+
+# Available tokens:
+#   None
+label-offline = 🎜 mpd is offline
+
+# Only applies if <icon-X> is used
+icon-play = ⏵
+icon-pause = ⏸
+icon-stop = ⏹
+icon-prev = ⏮
+icon-next = ⏭
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 🔀
+icon-repeat = 🔁
+icon-repeatone = 🔂
+icon-single = 🔂
+icon-consume = ✀
+
+# Used to display the state of random/repeat/repeatone/single
+# Only applies if <icon-[random|repeat|repeatone|single]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+# Only applies if <bar-progress> is used
+bar-progress-width = 45
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─

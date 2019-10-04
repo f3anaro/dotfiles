@@ -182,6 +182,8 @@ done
 # Export the locale settings to supprt UTF-8
 export LC_ALL="en_US.UTF-8"
 
+export EDITOR=vim
+
 # . $__DIR__/virtualenvwrapper
 # . $__DIR__/virtualenv-auto-activate.sh
 
