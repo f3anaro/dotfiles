@@ -18,7 +18,7 @@ alias la='ls -Ah'
 alias l='ls -CFlh'
 
 # dotfile management with git
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 complete -F _complete_alias config
 
 # Command shortcuts
