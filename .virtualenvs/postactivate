@@ -1,7 +1,0 @@
-#!/bin/bash
-# This hook is sourced after every virtualenv is activated.
-
-# PS1="$( basename $VIRTUAL_ENV ) $_OLD_VIRTUAL_PS1"
-
-PS1=$( echo $_OLD_VIRTUAL_PS1 | sed 's/\\n.*$//' )
-PS1+="${CandyBGray}env ${CandyBOrange}$( basename $VIRTUAL_ENV )\n${BWhite}\$ $Color_Off"

@@ -87,5 +87,8 @@ MonoBOrange="\[\033[1;38;05;166m\]" # Orange
 MonoBBlue="\[\033[1;38;05;81m\]"    # Blue
 
 # Candy colors from http://stevelosh.com/blog/2009/03/candy-colored-terminal/
+CandyOrange="\[\033[0;38;05;214m\]" # candy orange
+CandyGray="\[\033[0;38;05;242m\]"   # candy dark gray
+
 CandyBOrange="\[\033[1;38;05;214m\]" # candy bold orange
 CandyBGray="\[\033[1;38;05;242m\]"   # candy bold dark gray

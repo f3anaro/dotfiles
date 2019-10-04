@@ -16,16 +16,20 @@ fi
 alias ll='ls -alFh'
 alias la='ls -Ah'
 alias l='ls -CFlh'
-alias c='clear'
+
+# dotfile management with git
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+complete -F _complete_alias config
 
 # Command shortcuts
 alias py="python3"
 alias py2="python2"
 alias py3="python3"
-# alias clion="$HOME/local/opt/clion-1.0/bin/clion.sh &> /dev/null &"
 
-# alias docker="sudo -E docker"
-# alias docker-compose="sudo -E docker-compose"
+complete -F _complete_alias py
+complete -F _complete_alias py2
+complete -F _complete_alias py3
 
 alias ..="cd .."
 alias ...="cd ../.."
+

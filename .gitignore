@@ -1,2 +1,3 @@
-# This script will be downloaded by the installer
-vim/syntax/nginx.vim
+# Ignore the folder where the dotfiles will be cloned to avoid weird recursion
+# problems.
+/.dotfiles
