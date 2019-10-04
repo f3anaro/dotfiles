@@ -182,14 +182,18 @@ bindsym $mod+r mode "resize"
 
 hide_edge_borders both
 
-exec --no-startup-id xrandr --output HDMI-0 --primary --pos 0x0 --output DP-4 --right-of HDMI-0
+exec --no-startup-id $HOME/.screenlayout/$HOSTNAME
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always nextcloud
 exec_always --no-startup-id nm-applet
+exec_always redshift
 
 # Putting workspaces on specific screens
-workspace 1 output HDMI-0
-workspace 2 output DP-4
+workspace 1 output DP2-1
+workspace 2 output DP2-1
+workspace 3 output eDP1
+workspace 4 output eDP1
 
 gaps inner 10
 gaps outer 0
