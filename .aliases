@@ -17,6 +17,9 @@ alias ll='ls -alFh'
 alias la='ls -Ah'
 alias l='ls -CFlh'
 
+alias git-tree="git log --graph --oneline"
+complete -F _complete_alias git-tree
+
 # dotfile management with git
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 complete -F _complete_alias config
