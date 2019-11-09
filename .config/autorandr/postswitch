@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Reload i3 and set wallpaper for new screen configuration
+if systemctl --user is-active --quiet i3wm.service; then
+	systemctl --user reload i3wm.service
+	systemctl --user start wallpaper.service
+fi
+
+# Restart polybar for new screen configuration if it is running
+if systemctl --user is-active --quiet polybar.service; then
+	systemctl --user restart polybar.service
+fi
