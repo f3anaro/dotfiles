@@ -9,24 +9,28 @@
    /* maincolor:        #ed8712; */
    maincolor:        #00a1f1;
    /* highlight:        bold #ed8712; */
-   highlight:   bold #00a1f1;
+   highlight:   underline #00a1f1;
    /* urgentcolor:      #e53714; */
    urgentcolor:      #bd2c40;
 
    white:            #ffffff;
-   fgwhite:          #cfcfcf;
-   blackdarkest:     #1d1d1d;
+   /*fgwhite:          #cfcfcf;*/
+   fgwhite:          #D7E0E3;
+   blackdarkest:     #1d1d1ddd;
    blackwidget:      #262626;
    blackentry:       #292929;
    blackselect:      #303030;
-   darkgray:         #848484;
+   /*darkgray:         #848484;*/
+   darkgray:         #72848C;
    scrollbarcolor:   #505050;
-   font: "DejaVu Sans Mono Regular 11";
-   background-color: @blackdarkest;
+   /*font: "DejaVu Sans Mono Regular 11";*/
+   font: "Coda Bold 11";
+   /*background-color: @blackdarkest;*/
+   background-color: transparent;
 }
 
 window {
-   background-color: @blackdarkest;
+   /*background-color: @blackdarkest;*/
    anchor: north;
    location: north;
    y-offset: 20%;
@@ -36,16 +40,20 @@ mainbox {
    background-color: @blackdarkest;
    spacing:0px;
    children: [inputbar, message, sidebar, listview];
+   padding: 40px;
+   border: 2px;
+   border-radius: 1px;
+   border-color: #00a1f1cc;
 }
 
 message {
    padding: 6px 10px;
-   background-color:@blackwidget;
+   /*background-color:@blackwidget;*/
 }
 
 textbox {
    text-color:@darkgray;
-   background-color:@blackwidget;
+   /*background-color:@blackwidget;*/
 }
 
 listview {
@@ -53,100 +61,128 @@ listview {
    dynamic: true;
    scrollbar: true;
    spacing: 0px;
-   padding: 1px 0px 0px 0px;
-   margin: 0px 0px 1px 0px;
-   background: @blackdarkest;
+   padding: 0px 0px 0px 0px;
+   margin: 10px 0px 0px 0px;
+   /*margin: 0px 0px 1px 0px;*/
+   /*background: @blackdarkest;*/
 }
 
 element {
-   padding: 2px 15px;
+   /*padding: 2px 15px;*/
+   padding: 4px 10px;
 }
 
 element normal.normal {
-   padding: 0px 15px;
-   background-color: @blackentry;
+   /*padding: 0px 15px;*/
+   /*background-color: @blackentry;*/
    text-color: @fgwhite;
 }
 
 element normal.urgent {
-   background-color: @blackentry;
+   /*background-color: @blackentry;*/
    text-color: @urgentcolor;
 }
 
 element normal.active {
-   background-color: @blackentry;
+   /*background-color: @blackentry;*/
    text-color: @maincolor;
 }
 
+element selected {
+   /*background-color: #72848C33;*/
+
+   /* Highlight selected elements by adding a transparent white overlay */
+   background-color: #ffffff0e;
+
+   /* Use bottom border to highlight selected elements.
+    *
+    * Problem:
+    *   Not easily distinguishable from bottom border of inputbox.
+    */
+   /*border: 0px 0px 2px 0px;
+   border-color: @maincolor;*/
+}
+
 element selected.normal {
-    background-color: @blackselect;
+    /*background-color: @blackselect;*/
     text-color:       @fgwhite;
 }
 
 element selected.urgent {
-    background-color: @urgentcolor;
+    /*background-color: @urgentcolor;*/
     text-color:       @blackdarkest;
 }
 
 element selected.active {
-    background-color: @maincolor;
-    text-color:       @blackdarkest;
+    /*background-color: @maincolor;*/
+    /*text-color:       @blackdarkest;*/
+    text-color:       @maincolor;
 }
 
 element alternate.normal {
-    background-color: @blackentry;
+    /*background-color: @blackentry;*/
     text-color:       @fgwhite;
 }
 
 element alternate.urgent {
-    background-color: @blackentry;
+    /*background-color: @blackentry;*/
     text-color:       @urgentcolor;
 }
 
 element alternate.active {
-    background-color: @blackentry;
+    /*background-color: @blackentry;*/
     text-color:       @maincolor;
 }
 
 scrollbar {
-   background-color: @blackwidget;
+   /*background-color: @blackwidget;*/
    handle-color: @darkgray;
-   handle-width: 15px;
+   handle-width: 10px;
 }
 
 sidebar {
-   background-color: @blackwidget;
+   /*background-color: @blackwidget;*/
 }
 
 button {
-   background-color: @blackwidget;
+   /*background-color: @blackwidget;*/
    text-color:       #f00;
 }
 
 button selected {
-    text-color:       @maincolor;
+    text-color:       #f00;
 }
 
 inputbar {
-   background-color: @blackdarkest;
+   /*background-color: @blackdarkest;*/
    spacing: 0px;
+   /*padding: 0px 0px 2px 0px;*/
+   /*background-color: @maincolor;*/
+   border: 0px 0px 2px 0px;
+   border-color: @maincolor;
 }
 
 prompt {
-   padding:6px 9px;
+   /*padding: 6px 9px;*/
+   /*background-color: @maincolor;*/
+   text-color: @white;
+
+   /*padding: 10px 0;*/
+
+   padding: 10px 10px;
    background-color: @maincolor;
-   text-color:@white;
 }
 
 entry {
-   padding:6px 10px;
-   background-color:@blackwidget;
-   text-color:@fgwhite;
+   /*padding: 6px 10px;*/
+   padding: 10px 10px;
+   /*background-color:@blackwidget;*/
+   text-color: @fgwhite;
 }
 
 case-indicator {
    padding:6px 10px;
-   text-color:@maincolor;
-   background-color:@blackwidget;
+   text-color: @maincolor;
+   /*background-color:@blackwidget;*/
 }
 
