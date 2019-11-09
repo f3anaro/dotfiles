@@ -1,0 +1,24 @@
+[Unit]
+Description=Wallpaper for i3
+
+# # We use "polybar.service" as dependency here because we need to reset to
+# # wallpaper if polaybar is restarted in order to get a nice tray.
+# Requires=polybar.service
+# Requires=tray.target
+# After=tray.target
+# PartOf=polybar.service
+
+Requires=i3wm.service
+After=i3wm.service
+
+
+[Service]
+ExecStart=%h/.config/i3/wallpaper
+Type=oneshot
+RemainAfterExit=false
+
+[Install]
+# # Start "wallpaper.service" when "polybar.service" is started
+# WantedBy=polybar.service
+# WantedBy=tray.target
+WantedBy=i3wm.service

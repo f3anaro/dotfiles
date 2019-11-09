@@ -1,0 +1,12 @@
+[Unit]
+Description=autorandr
+Before=wm.target
+Before=redshift.service
+
+[Service]
+ExecStart=/usr/bin/autorandr --change
+Type=oneshot
+RemainAfterExit=false
+
+[Install]
+WantedBy=wm.target

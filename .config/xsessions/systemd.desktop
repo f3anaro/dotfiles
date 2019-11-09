@@ -1,0 +1,15 @@
+# Option entry for Gnome Display Manager (GDM)
+#
+# Copy this file into "/usr/share/xsessions/" to add a systemd-managed
+# window manager.
+#
+# Author: Lucas Kahlert <lucas.kahlert@square-src.de>
+#
+[Desktop Entry]
+Name=systemd
+Comment=Start systemd user wm.target
+Exec=systemctl --user start --wait wm.target
+Type=Application
+X-LightDM-DesktopName=systemd
+DesktopNames=systemd
+

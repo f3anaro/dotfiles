@@ -1,0 +1,10 @@
+[Unit]
+Description=Redshift adjusts the color temperature of your screen
+After=wm.target
+Requires=wm.target
+
+[Service]
+ExecStart=/usr/bin/redshift
+
+[Install]
+WantedBy=wm.target

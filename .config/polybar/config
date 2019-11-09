@@ -665,7 +665,7 @@ menu-0-0-exec = $HOME/.config/i3/lock.sh
 
 menu-0-1 =  Logout
 menu-0-1-foreground = ${colors.white}
-menu-0-1-exec = i3-msg exit
+menu-0-1-exec = systemctl --user stop wm.target
 
 menu-0-2 =  Reboot
 menu-0-2-foreground = ${colors.highlight}
