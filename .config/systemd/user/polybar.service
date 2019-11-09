@@ -10,7 +10,7 @@ ExecStartPre=/bin/systemctl --user stop polybar-top-tray@*.service
 ExecStartPre=/bin/systemctl --user stop polybar-top@*.service
 ExecStartPre=/bin/systemctl --user stop polybar-bottom@*.service
 
-ExecStart=/home/lucas/.config/polybar/polybar.sh
+ExecStart=%h/.config/polybar/polybar.sh
 ExecReload=/bin/true
 RemainAfterExit=on
 
