@@ -1,0 +1,15 @@
+[Unit]
+Description=Polybar top-tray panel
+PartOf=polybar.service
+ReloadPropagatedFrom=polybar.service
+Before=polybar.service
+Requires=i3wm.service
+After=i3wm.service
+
+[Service]
+Environment=POLYBAR_MONITOR=%i
+ExecStart=/usr/bin/polybar top-tray
+ExecReload=/usr/bin/polybar --reload top-tray
+
+[Install]
+WantedBy=i3wm.service

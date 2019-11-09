@@ -1,0 +1,16 @@
+[Unit]
+Description=NextCloud client
+After=polybar.service
+Requires=polybar.service
+PartOf=polybar.service
+After=network-manager-applet.service
+
+[Service]
+# FIXME: Ugly hack to get a nice tray icon. I have no idea why the background
+# 	is not working properly if nextcloud is started to fast.
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/nextcloud
+ExecStartPost=/bin/systemctl --user start wallpaper.service
+
+[Install]
+WantedBy=tray.target

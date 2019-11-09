@@ -1,0 +1,19 @@
+[Unit]
+Description=Polybar status bar
+Requires=i3wm.service
+After=i3wm.service
+PartOf=i3wm.service
+
+[Service]
+# Ensure that all polybar instances are terminated before we start new panels.
+ExecStartPre=/bin/systemctl --user stop polybar-top-tray@*.service
+ExecStartPre=/bin/systemctl --user stop polybar-top@*.service
+ExecStartPre=/bin/systemctl --user stop polybar-bottom@*.service
+
+ExecStart=/home/lucas/.config/polybar/polybar.sh
+ExecReload=/bin/true
+RemainAfterExit=on
+
+[Install]
+WantedBy=i3wm.service
+# RequiredBy=tray.target

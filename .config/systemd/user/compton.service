@@ -1,0 +1,10 @@
+[Unit]
+Description=Compton compositor for X11
+Requires=i3wm.service
+PartOf=i3wm.service
+
+[Service]
+ExecStart=/usr/bin/compton
+
+[Install]
+WantedBy=i3wm.service

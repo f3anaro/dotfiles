@@ -144,7 +144,10 @@ bindsym XF86AudioRaiseVolume exec amixer -D pulse sset 'Master' 5%+
 
 bindsym $mod+Shift+s exec rofi -show ssh
 bindsym $mod+Shift+w exec rofi -show window
-bindsym $mod+Shift+x exec $HOME/.config/i3/xrandr.sh
+bindsym $mod+Shift+x exec $HOME/.config/i3/autorandr.sh
+bindsym $mod+Shift+a exec autorandr --change
+bindsym $mod+Shift+n exec xdg-open $HOME
+bindsym Print exec gnome-screenshot -i
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -182,12 +185,15 @@ bindsym $mod+r mode "resize"
 
 hide_edge_borders both
 
-exec --no-startup-id $HOME/.screenlayout/$HOSTNAME
+#exec --no-startup-id $HOME/.screenlayout/$HOSTNAME
+#exec --no-startup-id systemctl --user restart polybar.service compton.service
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id systemd-notify --ready
+
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always nextcloud
-exec_always --no-startup-id nm-applet
-exec_always redshift
+#exec_always --no-startup-id nm-applet
+#exec_always --no-startup-id redshift
 
 # Putting workspaces on specific screens
 workspace 1 output HDMI-0
@@ -217,7 +223,7 @@ for_window [class="^.*"] border pixel 1
 # Theme
 # -----------------------------------------------------------------------------
 
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/IMG_0021.JPG
+#exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/IMG_0021.JPG
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #00a1f1 #007fbe #ffffff #2e9ef4   #007fbe

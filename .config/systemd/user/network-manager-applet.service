@@ -1,0 +1,11 @@
+[Unit]
+Description=NetworkManager tray applet
+After=polybar.service
+Requires=polybar.service
+PartOf=polybar.service
+
+[Service]
+ExecStart=/usr/bin/nm-applet
+
+[Install]
+WantedBy=tray.target

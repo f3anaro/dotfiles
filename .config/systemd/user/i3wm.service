@@ -1,0 +1,17 @@
+[Unit]
+Description=i3 window manager
+Before=wm.target
+Requires=wm.target
+
+[Service]
+Type=notify
+NotifyAccess=all
+ExecStart=/usr/bin/i3
+SuccessExitStatus=143
+
+# Returns exist code 1 because i3-msg does not get a response
+# @see https://github.com/i3/i3/issues/3565
+ExecReload=-/usr/bin/i3-msg restart
+
+[Install]
+RequiredBy=wm.target

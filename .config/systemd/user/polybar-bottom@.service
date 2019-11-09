@@ -1,0 +1,15 @@
+[Unit]
+Description=Polybar bottom panel
+PartOf=polybar.service
+ReloadPropagatedFrom=polybar.service
+Before=polybar.service
+Requires=i3wm.service
+After=i3wm.service
+
+[Service]
+Environment=POLYBAR_MONITOR=%i
+ExecStart=/usr/bin/polybar bottom
+ExecReload=/usr/bin/polybar --reload bottom
+
+[Install]
+WantedBy=i3wm.service

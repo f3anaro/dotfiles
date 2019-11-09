@@ -1,0 +1,8 @@
+[Unit]
+Description=Window manager tray
+Requires=polybar.service
+After=polybar.service
+PartOf=polybar.service
+
+[Install]
+WantedBy=polybar.service
