@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+from subprocess import check_output, run
+from pathlib import Path
+
+
+num_screens = len(
+    [
+        line
+        for line in check_output(["xrandr", "--query"]).split(b"\n")
+        if b" connected " in line
+    ]
+)
+
+wallpaper = Path.home() / ".config/i3/wallpaper.jpg"
+
+run(["feh", "--bg-fill"] + ([wallpaper] * num_screens), check=True)
