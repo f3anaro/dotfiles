@@ -86,7 +86,7 @@ __virtualenv_ps1() {
 
 if [ "$color_prompt" = yes ]; then
     # Include color definitions
-    . .colors
+    . $HOME/.colors
 
     # Build of Steve Losh's prompt
      
@@ -149,8 +149,8 @@ unset color_prompt force_color_prompt prompt_host
 # Alias definitions.
 # 
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-. .complete_alias  # Utility function for completing aliases
-. .aliases
+. $HOME/.complete_alias  # Utility function for completing aliases
+. $HOME/.aliases
 
 # Include common local binary directories
 PATH="$HOME/.local/bin:$PATH"
