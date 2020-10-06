@@ -1,7 +1,10 @@
 #!/bin/bash
 #
 # @see https://www.reddit.com/r/unixporn/comments/3358vu/
-# 
+#
+# "strict" mode for bash
+set -euo pipefail
+
 scrot /tmp/screen.png
 convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
  
@@ -14,7 +17,7 @@ if [[ -f $HOME/.config/i3/lock.png ]]; then
     RX=$(echo $R | cut -d' ' -f 1)
     RY=$(echo $R | cut -d' ' -f 3)
  
-    SR=$(xrandr --query | grep ' connected' | sed 's/primary //g' | cut -f3 -d' ')
+    SR=$(xrandr --query | grep -E ' connected (primary )?[0-9]+' | sed 's/primary //g' | cut -f3 -d' ')
     for RES in $SR; do
         # monitor position/offset
         SRX=$(echo $RES | cut -d'x' -f 1)                   # x pos
