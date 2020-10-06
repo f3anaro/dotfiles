@@ -1,5 +1,5 @@
-rofi.theme: flat.rasi
-rofi.columns: 2
+rofi.theme: nord.rasi
+! rofi.columns: 2
 ! rofi.display-run: run:
 ! rofi.display-ssh: ssh:
 ! rofi.display-window: window:
