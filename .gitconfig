@@ -2,15 +2,22 @@
 	email = lucas.kahlert@square-src.de
 	name  = Lucas Kahlert
 [core]
-	editor = vim
+	editor = subl -w
 [merge]
-	tool = meld
+    tool = meld
+[mergetool "meld"]
+    cmd = meld $LOCAL $BASE $REMOTE --auto-merge --output $MERGED
 [push]
 	default = simple
 [fetch]
 	recurseSubmodules = false
 [alias]
 	wdiff = diff --color-words
+	l = log --oneline
+	lgrep = "!f() { git log --oneline | grep \"${1}\"; }; f"
+[notes]
+        rewriteRef = refs/notes/commits
+        displayRef = refs/notes/commits
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
