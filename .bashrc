@@ -44,8 +44,15 @@ case "$TERM" in
 esac
 
 # Fix current directory reporting for tilix and other VTE-based applications.
+#
+# @see https://gnunn1.github.io/tilix-web/manual/vteconfig/
+#
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte.sh
+    if [ -f /etc/profile.d/vte.sh ]; then
+        source /etc/profile.d/vte.sh
+    elif [ -f /etc/profile.d/vte-2.91.sh ]; then
+        source /etc/profile.d/vte-2.91.sh
+    fi
 fi
 
 # Uncomment for a colored prompt, if the terminal has the capability; turned
