@@ -167,6 +167,18 @@ unset color_prompt force_color_prompt prompt_host
 # Include common local binary directories
 PATH="$HOME/.local/bin:$PATH"
 
+# pyenv support
+#
+# pyenv lets you easily switch between multiple versions of Python. It's
+# simple, unobtrusive, and follows the UNIX tradition of single-purpose tools
+# that do one thing well.
+export PYENV_ROOT="$HOME/.pyenv"
+
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+
 export EDITOR=vim
 
 # Enable direnv hook if available
